@@ -1,39 +1,6 @@
 Business Analytics Issues
 ======
 
-#### Reuniones con Lederman
-
-1. Entrega Viernes Abril 6
-+ Notebook días promedio hospitalización
-+ Notebook EDA
-+ Markdown de las extracciones del DWH
-+ Grafo de participantes
-
-2. Entrega Lunes Abril 24
-+ Dashboard de Tableau (variables categóricas y mapas)
-+ Resolver el tema de las variables continuas con los montos y eso
-
-3. Entrega Miércoles Mayo 10
-+ Análisis de pólizas, similar al de siniestros
-+ Grafo con resultados
-+ Definiciones de anomalias por distintos tipos de casos
-+ Notebook más completo resumido
-
-Decir que estoy en espera de layout y de tratamiento de variables y feature engenirreng
-Mostrar las nuevas variables creadas
-Mostrar las suposiciones de anomalías
-Un tableau
-Una corrida predictiva de siniestros
-
-Tiré un predicción de monto y nada, tire un número de reclamaciones y nada
-
-4. Entrega Jueves Mayo 18 - Tratar de cambiar a 30
-+ Presentación que va a dirección
-+ Definiciones de casos anómalos
-+ Ejemplos concretos de casos
-+ Unos ejemplos de como se vería la predicción
-
-
 #### Anomalies Detection on Health Insurance Claims
 
 1. Exploratory Data Analysis
@@ -50,20 +17,6 @@ Tiré un predicción de monto y nada, tire un número de reclamaciones y nada
     + Model Selection
     + Model Optimization
     + Descriptive
-
-
-#### Análisis descriptivo (Machote de Storytelling)
-
-Introducción del Problema de detección de anomalías
-Antecedentes de situaciones en el negocio
-
-Introducción a las variables utilizadas y las más relevantes
-Cifras globales históricas
-Cifras globales por variables
-
-Definicíón de anomalías
-Definición de que valores y bajo que combinaciones son presumiblemente anómalos
-
 
 
 #### Tipos de fraude definidos por Banorte
@@ -123,129 +76,6 @@ Definición de que valores y bajo que combinaciones son presumiblemente anómalo
 - Hay que ver la base de reclamaciones que se rechazan
 - Definir la probabilidad de reclamación, Existe?
 
-
-
-- Total claim? revisar tema de reserva
-- Categorizar reclamaciones por padecimiento
-- Descriptivo de pólizas, comparar con S.A.
-- Costos medios de padecimientos (gente de negocio que negocía con provedores)
-- Revisar descripciones que no necesariamente correpondan a GMM
-- Proyección de reservas dado en training (prducto prestadores de servicios)
-- Distancia de la reclamación al inicio o fin de vigencia de la póliza
-- Días promedio de hospitalización, relación con productos, póliza de la judicatura, que distribución tiene
-
-
-#### Análisis Exploratorio de Datos
-
-1. Diccionario de definición de variables  
-- Numéricas, continuas, categóricas etc
-
-2. Para las variables continuas:  
-
-- ¿Qué podemos encontrar?
-    - Asimetría
-    - *Outliers*
-    - Multimodalidad
-    - Huecos (*Gaps*)
-    - *Heaping*
-    - Redondeos
-    - Imposibilidades
-    - Errores
-
-- ¿Cómo visualizarlas?
-    - *Histogramas* Muestran la distribución empírica (*raw*)
-        - ¡*Empírica*!  No son estimadores...
-    - *Boxplot* Despliega *outliers*. Estadística Robusta (tener cuidado con el paquete que se utilice). Comparación entre subgrupos.
-    - *Dotplot* Cada observación un punto, permnite detectar *huecos* en los datos
-    - *Rugplot* Cada observación como una pequeña línea en el eje horizontal, se usa en conjunto con otras gráficas
-    - *Density estimate* Es como un *modelo* de los datos
-         - Sólo recuerda los límites de las variables, sobre si todo si son estrictos: *siempre* revisa la documentación.
-    - *Distribution estimate* Útil para comparar distribuciones (e.g. ver si una está adelante de la otra)
-    - *QQ plot* Compara la distribución contra una distribución teórica (por *default* es la distribución normal)
-
-
-3. Reescalamiento de Variables continuas:  
-+ Desviación estándar
-+ Rango intercuantil
-+ PCP plots para comparar las variables una vez que estén normalizadas
-
-- Normalizar
-    - Es útil cuando las cantidades absolutas son menos importantes que las relativas.
-    
-- Normalizar y reescalar 
-    - Usar la desviación estándar como unidad de medida.
-    - Tiene mucho sentido si la distribución es simétrica.
-    - Si no lo es, es posible que sea *lognormally distributed* 
-     (como el ingreso monetario o los gastos), una transformación `log10()`
-     lo hará útil.
-- Es una buena idea usar `log` si el rango de tus datos cubre varios ordenes de magnitud. 
-    - Regularmente, estas variables vienen de procesos **multiplicativos** en lugar de aditivos. 
-
-- Si el rango incluye cantidades negativas, usa (crea) una función `signedLog10`
-
-4. Análisis de Correlaciones: 
-
-+ Scatterplots
-+ Matrices de correlaciones
-
-
-5. Para las variables categóricas
-
-+ Tabla comparativa
-+ Clásico pie
-+ En cuanto a los tipos de gráficos tenemos *mosaicplots*, *doubledecker plots*, *fluctuation diagrams*, *treemaps*, *association plots* 
-y *parallel sets / categorical parallel coordinate plots*.
-
-ojo: - Para variable categórica y numérica es recomendable usar `boxplot` (en su versión de `violin` o `jitter`).
-
-
-6. Hacer los datos Tidy
-
-Dificultades de hacerlo tidy  
-- Nombres de las columnas representan valores de los datos en lugar de nombres de variables
-- Una columna contiene varias variables en lugar de una variable
-- Una tabla contiene más de una unidad de observación
-- Las variables están contenidas en los renglones y columnas, en lugar de sólo columnas.
-- Los datos de una unidad observacional están dispersas en varios *data sets*
-
-7. Missing values 
-
-Aguas con los missing values, que son en cada caso, a veces son casos no documentados
-
-- ¿Valores faltantes?    
-- ¿Valores inválidos?
-- ¿Outliers?
-- ¿Rangos?
-    - Es importante saber cuanto varía la variable.
-    - Si es muy amplio, puede ser un problema para algunos algoritmos de modelado.
-    - Si varía muy poco (o nada) no puede ser usado como predictor.
-- ¿Unidades?
-
-Ya sea imputar o excluir aplica para outluiers tanto como para missing values
-
-Revisar correlaciones de missing values con otras variables y descubrir si "desaparecen" juntas
-
-    x <- as.data.frame(abs(is.na(df))) # df es un data.frame
-    # Extrae las variables que tienen algunas celdas con NAs
-    y <- x[which(sapply(x, sd) > 0)] 
-    # Da la correación un valor alto positivo significa que desaparecen juntas.
-    cor(y) 
-
-Para las categóricas el NA puede ser una categoría o nivel más
-
-- Una estrategia es rellenar los valores faltantes con alguna medida de centralidad.
-    - Media, mediana, moda, etc.
-- Para variables distribuidas normalmente, esta opción es la mejor.
-- Pero para variables *skewed*  o con *outliers* esta decisión puede ser desastrosa.
-    + en general (`median` si es numérica, `moda` si es categórica)
-
-Para una imputación más pro
-+ Ver la correlación de las variables
-    * Si es alta entonces la dependiente se puede imputar con una regresión gracias a la independiente
-
-8. Construcción de Módulos para hacer pipeline
-
-`00-load.R`, `01-prepare.R` y `02-clean.R` y `run.R`
 
 
 #### Segmentación de siniestros
@@ -452,19 +282,6 @@ Póliza:
  
 
 
-
-#### Indemnizaciones
-
-Revisar cifras de referencia para cuadrar con análisis
-
-+ Número de pólizas siniestradas mensuales histórico
-+ Número de siniestros mensuales histórico
-+ Número de reclamaciones mensuales histórico
-+ Número de médicos en red
-+ Número de agentes
-+ Número pro
-
-
 #### Proceso GMM  
 --SINIESTRO->CNS->SAS(SISTEMA DE ADMINISTRACIÓN DE SINIESTROS)->SE GUARDA EN SABE->RECLAMOS Y DICTAMINACIONES->PAGOS Y REEMBOLSOS
 
@@ -491,36 +308,6 @@ Loss reserve – When a claim is first reported, it is nearly impossible to pred
 Activity – It makes sense to put your more experienced adjusters on the most complex claims. But claims are usually assigned based on limited data – resulting in high reassignment rates that effect claim duration, settlement amounts and ultimately, the customer experience. Data mining techniques cluster and group loss characteristics to score, prioritize and assign claims to the most appropriate adjuster based on experience and loss type. In some cases, claims can even be automatically adjudicated and settled.  
 
 Litigation – A significant portion of a company’s loss adjustment expense ratio goes to defending disputed claims. Insurers can use analytics to calculate a litigation propensity score to determine which claims are more likely to result in litigation. You can then assign those claims to more senior adjusters who are more likely to be able to settle the claims sooner and for lower amounts.
-
-Descriptivo
-=======
-
-Hoja 1
-
-(el modelo de entrenamiento tomaría de 2005 a 2015) y otro de todo
-
-(el modelo de entrenamiento trataría al extranjero y a Monterrey por aparte para no meter ruido)
-
-Hoja 2
-
-(Se propondrá un modelo para AP y otro para GMM)
-
-Hoja 3
-
-Análisis por tipo de siniestro, el tipo de siniestro al final no dice mucho, entonces los tres niveles Ramo, Subramo, Tipo de Siniestro, se resume en accidentes y enfermedades, entonces lo que veo es que hay que hacer un dataset para accidentes y otro para enfermedades, y meterme a ver los catálogos de enferemdades ni modo y asesorarme con las áreas corresponeidntes, también conlleva a un reetiquetado con fines para el análisis.
-
-(En el dataset de entrenamiento excluiría el desempleo, suicidio por que no hay datos suficientes para entrenar e incluiría las consideraciones de las anomalías contextuales)
-
-Hoja 4
-
-(Incluiría data sets de entrenamiento categorizando las edaddes y el número de reclamaciones)}
-
-Hoja 5
-
-(Hay que hacer una lista de casos, y decidir el tipo de anomalía)
-
-De hecho en la relación de grados, no se observan los primeos como hospitales de Monterrey
-son el Dalinde, Country en Jalisco, Medica Sur
 
 
 Variables para el dataset de entrenamiento
@@ -589,25 +376,3 @@ RIN (SINOSINOSITIS)
 RETRA (RETASO)
 REFLUJO
 RECIEN (NEONATO)
-
-
-
-Segmentación de Cartera para TMK
-========
-
-Ana María Gaspar  
-
-Necesito saber como funciona el negocio
-Cual es la operación de inicio a fin de un seguro
-Cual es la operación de inicio a fin de una campaña
-Necesito saber cual es el objetivo de cada negocio
-
-
-1 Issue diferentes fuentes
-Hay retro de call center
-Entregables son tablas
-Las validaciones las hacen a mano
-Mejores campañas? campañas inteligentes? solución tecnológica?
-Efectividad de campañas
-
-
